@@ -1,0 +1,35 @@
+--SoundServices incluye phonk
+--MEnu 2v2
+-- Obtener el servicio SoundService
+local soundService = game:GetService("SoundService")
+
+-- Crear una tabla para almacenar los IDs de sonidos
+local soundIds = {
+    "rbxassetid://18841894272", -- Reemplaza con los IDs de tus sonidos
+    "rbxassetid://14145623658", -- Añade hasta 20 IDs aquí
+    "rbxassetid://14145626111", 
+    "rbxassetid://14145618923", 
+    -- Agrega hasta 20 IDs de sonidos en total
+}
+
+-- Función para reproducir sonidos uno tras otro
+local function playSoundsSequentially(soundIds)
+    for _, soundId in ipairs(soundIds) do
+        local sound = Instance.new("Sound")
+        sound.SoundId = soundId
+        sound.Looped = false  -- No repetir, reproducir solo una vez
+        sound.Parent = soundService  -- Coloca el sonido en SoundService
+        sound:Play()  -- Reproducir el sonido
+
+        -- Esperar hasta que el sonido termine de reproducirse
+        repeat
+            wait(0.1)
+        until not sound.IsPlaying
+
+        -- Limpiar el sonido después de que haya terminado de reproducirse
+        sound:Destroy()
+    end
+end
+
+-- Ejecutar la función para reproducir los sonidos
+playSoundsSequentially(soundIds)
