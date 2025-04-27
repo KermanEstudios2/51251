@@ -7,10 +7,6 @@ local blacklisted_hwids = {
     ["9E0D09E9-CB51-4EC3-A56A-FD8923F834E9"] = true, -- KTPSliglys
     ["7F3FEE2B-7AD5-4878-9003-1B442A738561"] = true, -- KTPFolbox
     ["62003D35-F219-4C70-96F5-90C245814ACA"] = true, -- Julio
-    [""] = true, -- Blacklisted hwid in the string
-    [""] = true, -- Blacklisted hwid in the string
-    [""] = true, -- Blacklisted hwid in the string
-    [""] = true, -- Blacklisted hwid in the string
 }
 
 if blacklisted_hwids(hwid) then
