@@ -2,6 +2,7 @@
 local blacklistedHWIDs = {
     ["86caa0e8-16a8-4ac7-8428-0388e9afd31e"] = true, -- Moote - LugarMoote
     ["CF946914-5BCB-4399-9123-910C8B5E6881"] = true, -- Angel - AngelGMT
+    ["62003D35-F219-4C70-96F5-90C245814ACA"] = true, -- Angel - Julio
 }
 
 -- Obtener HWID dependiendo del ejecutor
