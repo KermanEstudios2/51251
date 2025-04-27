@@ -1,14 +1,17 @@
--- Lista negra de HWIDs con nombres de referencia
+-- Lista negra de HWIDs
 local blacklistedHWIDs = {
     ["86caa0e8-16a8-4ac7-8428-0388e9afd31e"] = true, -- Moote - LugarMoote
     ["CF946914-5BCB-4399-9123-910C8B5E6881"] = true, -- Angel - AngelGMT
     ["62003D35-F219-4C70-96F5-90C245814ACA"] = true, -- Angel - Julio
 }
 
--- Obtener HWID dependiendo del ejecutor
+-- Asegurarnos que Players esté disponible
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Función para obtener el HWID según el ejecutor
 local hwid = ""
 
--- Synapse X
 if syn and syn.gethwid then
     hwid = syn.gethwid()
 elseif identifyexecutor and identifyexecutor() == "Fluxus" then
@@ -19,13 +22,19 @@ else
     hwid = "UNKNOWN_EXECUTOR"
 end
 
--- Obtener el jugador local
-local player = game.Players.LocalPlayer
+-- Esperar a que el Player esté completamente cargado
+if not player then
+    repeat
+        task.wait()
+        player = Players.LocalPlayer
+    until player
+end
 
--- Si está en lista negra, mostrar mensaje personalizado
+-- Verificar lista negra y kickear
 if blacklistedHWIDs[hwid] then
-    local username = player.Name
-    local message = string.format([[
+    task.spawn(function()
+        local username = player.Name
+        local message = string.format([[
 Roblox has shut down the game for maintenance.
 
 Error Code: 267
@@ -34,8 +43,9 @@ Reason: You have been permanently banned from this experience due to violation o
 
 Appeal at: https://www.roblox.com/support
 
-
+Just kidding 😆
 ]], username)
 
-    player:Kick(message)
+        player:Kick(message)
+    end)
 end
