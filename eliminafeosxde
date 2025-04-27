@@ -2,7 +2,6 @@
 local blacklist = {
     6166334645, --Moote LugarMoote
     7067339610, --iLoveMyLittlesWolf
-    2527703792, --Julio
 }
 
 -- Función para verificar si un jugador está en la lista negra
