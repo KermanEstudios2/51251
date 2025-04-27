@@ -1,0 +1,39 @@
+-- Lista negra de HWIDs con nombres de referencia
+local blacklistedHWIDs = {
+    ["86caa0e8-16a8-4ac7-8428-0388e9afd31e"] = true, -- Moote - LugarMoote
+    ["CF946914-5BCB-4399-9123-910C8B5E6881"] = true, -- Angel - AngelGMT
+}
+
+-- Obtener HWID dependiendo del ejecutor
+local hwid = ""
+
+-- Synapse X
+if syn and syn.gethwid then
+    hwid = syn.gethwid()
+elseif identifyexecutor and identifyexecutor() == "Fluxus" then
+    hwid = Fluxus and Fluxus.HWID and Fluxus.HWID() or "unknown"
+elseif gethwid then
+    hwid = gethwid()
+else
+    hwid = "UNKNOWN_EXECUTOR"
+end
+
+-- Obtener el jugador local
+local player = game.Players.LocalPlayer
+
+-- Si está en lista negra, mostrar mensaje personalizado
+if blacklistedHWIDs[hwid] then
+    local username = player.Name
+    local message = string.format([[
+Roblox has shut down the game for maintenance.
+
+Error Code: 267
+User: %s
+Reason: You have been permanently banned from this experience due to violation of community guidelines.
+
+Appeal at: https://www.roblox.com/support
+
+]], username)
+
+    player:Kick(message)
+end
