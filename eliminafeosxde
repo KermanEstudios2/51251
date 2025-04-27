@@ -5,7 +5,6 @@ local blacklist = {
     4184174996, -- Draco KTP
     7626651467, -- Tocinacio KTP
     853655872,  -- Folbox KTP
-    2527703792,  -- Julio
 }
 
 -- Función para verificar si un jugador está en la lista negra
